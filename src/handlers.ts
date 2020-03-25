@@ -53,5 +53,8 @@ export const itemHandler: WorkerHandlers["item"] = async (input, ctx) => {
                 url: result.downloads.nativeDownloads.high,
             },
         ],
+        images: {
+            poster: result.thumbnail,
+        },
     };
 };
