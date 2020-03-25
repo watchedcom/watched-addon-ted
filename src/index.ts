@@ -7,6 +7,9 @@ export const tedAddon = createWorkerAddon({
     description: "Ideas worth spreading",
     version: "0.0.0",
     itemTypes: ["movie"],
+    defaultDirectoryFeatures: {
+        search: { enabled: true },
+    },
     defaultDirectoryOptions: {
         imageShape: "landscape",
         displayName: true,

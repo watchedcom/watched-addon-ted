@@ -1,5 +1,6 @@
 import { WorkerHandlers } from "@watchedcom/sdk";
 import { parseList, parseItem } from "./ted-scraper";
+import * as qs from "querystring";
 
 export const directoryHandler: WorkerHandlers["directory"] = async (
     input,
@@ -10,7 +11,11 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
     const cursor: number = <number>input.cursor || 1;
 
     const results = await fetch(
-        "https://www.ted.com/talks?page=" + cursor
+        "https://www.ted.com/talks?" +
+            qs.stringify({
+                page: cursor,
+                q: input.search || undefined,
+            })
     ).then(async (resp) => {
         return parseList(await resp.text());
     });
