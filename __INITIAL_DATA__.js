@@ -1,6 +1,6 @@
 /**
  * Sample data that is stored inside HTML from the page:
- * https://www.ted.com/talks/alanna_shaikh_why_covid_19_is_hitting_us_now_and_how_to_prepare_for_the_next_outbreak/up-next
+ * https://www.ted.com/talks/stefan_al_why_isn_t_the_netherlands_underwater
  */
 module.exports = {
     comments: null,
