@@ -7,22 +7,23 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
 ) => {
     console.log("directory", input);
     const { fetch } = ctx;
+    const cursor: number = <number>input.cursor || 1;
 
-    const results = await fetch("https://www.ted.com/talks").then(
-        async (resp) => {
-            return parseList(await resp.text());
-        }
-    );
+    const results = await fetch(
+        "https://www.ted.com/talks?page=" + cursor
+    ).then(async (resp) => {
+        return parseList(await resp.text());
+    });
 
     return {
-        nextCursor: null,
+        nextCursor: results.length ? cursor + 1 : null,
         items: results.map((item) => {
             const id = item.link;
             return {
                 id,
                 ids: { id },
                 type: "movie",
-                name: item.title,
+                name: `${item.title}`,
                 images: {
                     poster: item.thumbnail,
                 },
@@ -47,6 +48,7 @@ export const itemHandler: WorkerHandlers["item"] = async (input, ctx) => {
         ids: input.ids,
         name: input.name || result.title,
         description: result.description,
+        releaseDate: result.recorded,
         sources: [
             {
                 type: "url",

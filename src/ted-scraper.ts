@@ -10,6 +10,7 @@ interface TedItem {
 
 interface ExtendedTedItem {
     description: string;
+    recorded: string;
     downloads: {
         nativeDownloads: {
             high: string;
@@ -73,5 +74,6 @@ export const parseItem = async (
         link: initialData.url,
         thumbnail: firstTalk.hero,
         downloads: firstTalk.downloads,
+        recorded: firstTalk.recoded_at,
     };
 };
