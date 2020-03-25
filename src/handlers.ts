@@ -1,5 +1,5 @@
 import { WorkerHandlers } from "@watchedcom/sdk";
-import { scrape } from "./ted-scraper";
+import { parseList, parseItem } from "./ted-scraper";
 
 export const directoryHandler: WorkerHandlers["directory"] = async (
     input,
@@ -10,7 +10,7 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
 
     const results = await fetch("https://www.ted.com/talks").then(
         async (resp) => {
-            return scrape(await resp.text());
+            return parseList(await resp.text());
         }
     );
 
@@ -34,5 +34,24 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
 export const itemHandler: WorkerHandlers["item"] = async (input, ctx) => {
     console.log("item", input);
 
-    throw new Error("Not implemented");
+    const { fetch } = ctx;
+
+    const url = "https://www.ted.com" + input.ids.id;
+
+    const result = await fetch(url).then(async (resp) =>
+        parseItem(await resp.text())
+    );
+
+    return {
+        type: "movie",
+        ids: input.ids,
+        name: input.name || result.title,
+        description: result.description,
+        sources: [
+            {
+                type: "url",
+                url: result.downloads.nativeDownloads.high,
+            },
+        ],
+    };
 };

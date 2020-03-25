@@ -1,4 +1,5 @@
 import * as cheerio from "cheerio";
+import * as fs from "fs";
 
 interface TedItem {
     title: string;
@@ -7,7 +8,18 @@ interface TedItem {
     link: string;
 }
 
-export const scrape = async (html: string): Promise<TedItem[]> => {
+interface ExtendedTedItem {
+    description: string;
+    downloads: {
+        nativeDownloads: {
+            high: string;
+            low: string;
+            medium: string;
+        };
+    };
+}
+
+export const parseList = async (html: string): Promise<TedItem[]> => {
     const results: TedItem[] = [];
 
     const $ = cheerio.load(html);
@@ -32,4 +44,34 @@ export const scrape = async (html: string): Promise<TedItem[]> => {
     });
 
     return results;
+};
+
+export const parseItem = async (
+    html: string
+): Promise<TedItem & ExtendedTedItem> => {
+    const $ = cheerio.load(html);
+
+    const scriptData = $("script[data-spec=q]").first().html();
+
+    const dataObj = /{.*}/.exec(<string>scriptData);
+    const parsed = JSON.parse((dataObj || [])[0]);
+    const initialData = parsed?.__INITIAL_DATA__;
+
+    if (!initialData) {
+        throw new Error("Unable to extract data object");
+    }
+
+    const firstTalk = initialData.talks[0];
+
+    return {
+        title: firstTalk.title,
+        description: firstTalk.description,
+        speaker: ["firstname", "lastname"]
+            .map((_) => firstTalk.speakers[0][_])
+            .filter((_) => _)
+            .join(" "),
+        link: initialData.url,
+        thumbnail: firstTalk.hero,
+        downloads: firstTalk.downloads,
+    };
 };
