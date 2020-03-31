@@ -5,6 +5,7 @@ export const tedAddon = createWorkerAddon({
     id: "ted",
     name: "TED",
     description: "Ideas worth spreading",
+    icon: "https://www.ted.com/favicon.ico",
     version: "0.0.0",
     itemTypes: ["movie"],
     defaultDirectoryFeatures: {
