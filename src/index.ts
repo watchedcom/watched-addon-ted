@@ -1,4 +1,4 @@
-import { createWorkerAddon } from "@watchedcom/sdk";
+import { createWorkerAddon, runCli } from "@watchedcom/sdk";
 import { directoryHandler, itemHandler } from "./handlers";
 
 export const tedAddon = createWorkerAddon({
@@ -20,3 +20,5 @@ export const tedAddon = createWorkerAddon({
 tedAddon.registerActionHandler("directory", directoryHandler);
 
 tedAddon.registerActionHandler("item", itemHandler);
+
+runCli([tedAddon]);

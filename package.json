@@ -4,21 +4,22 @@
   "main": "dist",
   "scripts": {
     "build": "tsc",
-    "start": "watched-sdk start --prod",
-    "develop": "watched-sdk start"
+    "start": "node .",
+    "develop": "ts-node-dev --transpile-only --no-notify src"
   },
   "dependencies": {
-    "@watchedcom/sdk": "^0.21.0",
+    "@watchedcom/sdk": "^0.34.0",
     "cheerio": "^1.0.0-rc.3",
-    "qs": "^6.9.2"
+    "qs": "^6.9.4"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.17",
-    "@types/qs": "^6.9.1",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.9",
-    "prettier": "^2.0.2",
-    "typescript": "^3.8.3"
+    "@types/cheerio": "^0.22.21",
+    "@types/qs": "^6.9.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "ts-node-dev": "^1.0.0-pre.52",
+    "typescript": "^3.9.7"
   },
   "husky": {
     "hooks": {
