@@ -21,4 +21,4 @@ tedAddon.registerActionHandler("directory", directoryHandler);
 
 tedAddon.registerActionHandler("item", itemHandler);
 
-runCli([tedAddon]);
+runCli([tedAddon], { singleMode: true });
