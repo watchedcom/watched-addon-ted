@@ -86,10 +86,10 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
 };
 
 export const itemHandler: WorkerHandlers["item"] = async (input, ctx) => {
-    await ctx.requestCache([input.ids.id, input.name], {
-        ttl: Infinity,
-        refreshInterval: "1h",
-    });
+    // await ctx.requestCache([input.ids.id, input.name], {
+    //     ttl: Infinity,
+    //     refreshInterval: "1h",
+    // });
 
     const { fetch } = ctx;
 
