@@ -6,7 +6,11 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
     input,
     ctx
 ) => {
-    console.log("directory", input);
+    await ctx.requestCache([input.search, input.filter, input.cursor], {
+        ttl: Infinity,
+        refreshInterval: "1h",
+    });
+
     const { fetch } = ctx;
     const cursor: number = <number>input.cursor || 1;
 
@@ -82,7 +86,10 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
 };
 
 export const itemHandler: WorkerHandlers["item"] = async (input, ctx) => {
-    console.log("item", input);
+    await ctx.requestCache([input.ids.id, input.name], {
+        ttl: Infinity,
+        refreshInterval: "1h",
+    });
 
     const { fetch } = ctx;
 
