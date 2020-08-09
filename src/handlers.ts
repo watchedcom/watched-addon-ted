@@ -19,9 +19,9 @@ export const directoryHandler: WorkerHandlers["directory"] = async (
         { arrayFormat: "brackets" }
     );
 
-    const results = await fetch(
-        "https://www.ted.com/talks?" + queryString
-    ).then(async (resp) => {
+    const url = "https://www.ted.com/talks?" + queryString;
+
+    const results = await fetch(url).then(async (resp) => {
         return parseList(await resp.text());
     });
 
@@ -101,7 +101,7 @@ export const itemHandler: WorkerHandlers["item"] = async (input, ctx) => {
         sources: [
             {
                 type: "url",
-                url: result.downloads.nativeDownloads.high,
+                url: `https://hls.ted.com/talks/${result.downloads.id}.m3u8`,
             },
         ],
         images: {

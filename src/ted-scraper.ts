@@ -12,6 +12,7 @@ interface ExtendedTedItem {
     description: string;
     recorded: string;
     downloads: {
+        id: number;
         nativeDownloads: {
             high: string;
             low: string;
