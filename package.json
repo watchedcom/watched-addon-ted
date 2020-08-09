@@ -8,13 +8,13 @@
     "develop": "ts-node-dev --transpile-only --no-notify src"
   },
   "dependencies": {
-    "@watchedcom/sdk": "^0.34.0",
+    "@watchedcom/sdk": "^0.35.1",
     "cheerio": "^1.0.0-rc.3",
     "qs": "^6.9.4"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.21",
-    "@types/qs": "^6.9.3",
+    "@types/qs": "^6.9.4",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
