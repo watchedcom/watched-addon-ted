@@ -1,10 +1,3 @@
-# [Ted](https://www.ted.com/) addon for [WATCHED.com](https://www.watched.com)
+# DEPRECATED
 
-This addon was created with the [WATCHED javascript SDK](https://github.com/watchedcom/sdk-javascript).
-
-## Start the development addon server
-
-```shell
-npm i
-npm run develop
-```
+The WATCHED addon system was renamed to MediaURL. The development continues at https://github.com/mediaurl
